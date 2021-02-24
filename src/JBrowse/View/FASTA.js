@@ -75,6 +75,7 @@ return declare(null,
      */
     renderText: function( region, seq ) {
         return '>' + region.ref
+            + ' '+region.name
             + ' '+Util.assembleLocString(region)
             + ( region.type ? ' class='+region.type : '' )
             + ' length='+(region.end - region.start)

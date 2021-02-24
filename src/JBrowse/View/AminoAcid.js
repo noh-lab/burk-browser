@@ -75,14 +75,13 @@ return declare(null,
      * @returns {String} - faa formated string
      */
     renderText: function( region, seq ) {
-        return '>' + region.product
+        return '>' + region.name
+            + ' '+region.product
             + '\n'
             + this._wrap( this.proteinFromNuc( seq ), this.width );
     },
     proteinFromNuc: function( seq ) {
-        var splitSeq = seq.match(/.{1,3}/g)
-        var protSeq = splitSeq.map(Util.codonMapping)
-        return protSeq.join('');;
+        return seq.match(/.{1,3}/g).map(Util.codonMapping).join('');;
     },
     _wrap: function( string, length ) {
         length = length || this.width;
