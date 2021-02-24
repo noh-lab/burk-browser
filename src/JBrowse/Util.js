@@ -1,3 +1,5 @@
+import { ZERO } from "long";
+
 const url = cjsRequire('url')
 
 /**
@@ -585,6 +587,79 @@ Util = {
 
     intersect(x1, x2, y1, y2) {
         return x2 >= y1 && y2 >= x1
+    },
+
+    
+    codonMapping: function(codon){
+    var aminoAcids = {
+        TTT: "F",
+        TTC: "F",
+        GCT: "A",
+        GCC: "A",
+        GCA: "A",
+        GCG: "A",
+        CGT: "R",
+        CGC: "R",
+        CGA: "R",
+        CGG: "R",
+        AGA: "R",
+        AGG: "R",
+        GAT: "D",
+        GAC: "D",
+        AAT: "B",
+        AAC: "B",
+        GAT: "B",
+        GAC: "B",
+        TGT: "C",
+        TGC: "C",
+        CAA: "Q",
+        CAG: "Q",
+        GAA: "E",
+        GAG: "E",
+        GAA: "Z",
+        GAG: "Z",
+        GGT: "G",
+        GGC: "G",
+        GGA: "G",
+        GGG: "G",
+        CAT: "H",
+        CAC: "H",
+        ATG: "M",
+        ATT: "I",
+        ATC: "I",
+        ATA: "I",
+        CTT: "L",
+        CTC: "L",
+        CTA: "L",
+        CTG: "L",
+        TTA: "L",
+        TTG: "L",
+        AAA: "K",
+        AAG: "K",
+        CCT: "P",
+        CCC: "P",
+        CCA: "P",
+        CCG: "P",
+        TCT: "S",
+        TCC: "S",
+        TCA: "S",
+        TCG: "S",
+        AGT: "S",
+        AGC: "S",
+        ACT: "T",
+        ACC: "T",
+        ACA: "T",
+        ACG: "T",
+        TGG: "W",
+        TAT: "Y",
+        TAC: "Y",
+        GTT: "V",
+        GTC: "V",
+        GTA: "V",
+        GTG: "V"
+    }
+
+        return aminoAcids[codon];
     },
 
     // orientation definitions from igv.js, see also https://software.broadinstitute.org/software/igv/interpreting_pair_orientations

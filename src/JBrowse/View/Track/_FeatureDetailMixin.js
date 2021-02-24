@@ -10,6 +10,7 @@ define([
             'dojo/dom-construct',
             'JBrowse/Util',
             'JBrowse/View/FASTA',
+            'JBrowse/View/AminoAcid',
             'JBrowse/View/_FeatureDescriptionMixin'
         ],
         function(
@@ -21,6 +22,7 @@ define([
             domConstruct,
             Util,
             FASTAView,
+            AminoAcidView,
             FeatureDescriptionMixin
         ) {
 
@@ -79,6 +81,9 @@ return declare( FeatureDescriptionMixin, {
 
         if (!this.config.hideSequenceBox) {
             this._renderUnderlyingReferenceSequence( track, f, featDiv, container );
+        }
+        if (!this.config.hideSequenceBox){
+            this._renderUnderlyingProteinSequence( track, f, featDiv, container );
         }
 
 
@@ -219,6 +224,64 @@ return declare( FeatureDescriptionMixin, {
              }));
         }
     },
+
+    _renderUnderlyingProteinSequence: function( track, f, featDiv, container ) {
+
+        // render the sequence underlying this feature if possible
+        var field_container = dojo.create('div', { className: 'field_container feature_sequence' }, container );
+        dojo.create( 'h2', { className: 'field feature_sequence', innerHTML: 'Protein sequence', title: 'protein sequence underlying this '+(f.get('type') || 'feature') }, field_container );
+        var proteinContainerID = 'feature_sequence'+this._uniqID();
+        var proteinContainer = dojo.create(
+            'div', {
+                id: proteinContainerID,
+                innerHTML: '<div style="height: 12em">Loading...</div>',
+                className: 'value feature_sequence'
+            }, field_container);
+        var maxSize = this.config.maxFeatureSizeForUnderlyingRefSeq;
+        if( maxSize < (f.get('end') - f.get('start')) ) {
+            proteinContainer.innerHTML = 'Not displaying underlying reference sequence, feature is longer than maximum of '+Util.humanReadableNumber(maxSize)/3+'bp';
+        } else {
+             track.browser.getStore('refseqs', dojo.hitch(this,function( refSeqStore ) {
+                 proteinContainer = dojo.byId(proteinContainerID) || proteinContainer;
+                 if( refSeqStore ) {
+                     refSeqStore.getReferenceSequence(
+                         { ref: this.refSeq.name, start: f.get('start'), end: f.get('end')},
+                         // feature callback
+                         dojo.hitch( this, function( seq ) {
+                             proteinContainer = dojo.byId(proteinContainerID) || proteinContainer;
+                             proteinContainer.innerHTML = '';
+                             // the HTML is rewritten by the dojo dialog
+                             // parser, but this callback may be called either
+                             // before or after that happens.  if the fetch by
+                             // ID fails, we have come back before the parse.
+                             var textArea = new AminoAcidView({ track: this, width: 62, htmlMaxRows: 10 })
+                                                .renderHTML(
+                                                    { ref:   this.refSeq.name,
+                                                      start: f.get('start'),
+                                                      end:   f.get('end'),
+                                                      strand: f.get('strand'),
+                                                      type: f.get('type'),
+                                                      product: f.get('product') == undefined? f.get('name') : f.get('product')
+                                                    },
+                                                    f.get('strand') == -1 ? Util.revcom(seq) : seq,
+                                                    proteinContainer
+                                                );
+                       }),
+                       // end callback
+                       function() {},
+                       // error callback
+                       dojo.hitch( this, function() {
+                           proteinContainer = dojo.byId(proteinContainerID) || proteinContainer;
+                           proteinContainer.innerHTML = '<span class="ghosted">reference sequence not available</span>';
+                       })
+                     );
+                 } else {
+                     proteinContainer.innerHTML = '<span class="ghosted">reference sequence not available</span>';
+                 }
+             }));
+        }
+    },
+
 
     _uniqID: function() {
         this._idCounter = this._idCounter || 0;
