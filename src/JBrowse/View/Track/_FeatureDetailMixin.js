@@ -174,7 +174,7 @@ return declare( FeatureDescriptionMixin, {
         // render the sequence underlying this feature if possible
         var field_container = dojo.create('div', { className: 'field_container feature_sequence' }, container );
         dojo.create( 'h2', { className: 'field feature_sequence', innerHTML: 'Region sequence', title: 'reference sequence underlying this '+(f.get('type') || 'feature') }, field_container );
-        var valueContainerID = 'feature_sequence'+this._uniqID();
+        var valueContainerID = 'feature_sequence_'+this._uniqID();
         var valueContainer = dojo.create(
             'div', {
                 id: valueContainerID,
@@ -198,13 +198,14 @@ return declare( FeatureDescriptionMixin, {
                              // parser, but this callback may be called either
                              // before or after that happens.  if the fetch by
                              // ID fails, we have come back before the parse.
-                             var textArea = new FASTAView({ track: this, width: 62, htmlMaxRows: 10 })
+                             var textArea = new FASTAView({ track: this, width: 60, htmlMaxRows: 10 })
                                                 .renderHTML(
                                                     { ref:   this.refSeq.name,
                                                       start: f.get('start'),
                                                       end:   f.get('end'),
                                                       strand: f.get('strand'),
-                                                      type: f.get('type')
+                                                      type: f.get('type'),
+                                                      name: f.get('name') == undefined ? f.get('id') : f.get('name')
                                                     },
                                                     f.get('strand') == -1 ? Util.revcom(seq) : seq,
                                                     valueContainer
@@ -227,10 +228,10 @@ return declare( FeatureDescriptionMixin, {
 
     _renderUnderlyingProteinSequence: function( track, f, featDiv, container ) {
 
-        // render the sequence underlying this feature if possible
+        // render the protein sequence underlying this feature if possible
         var field_container = dojo.create('div', { className: 'field_container feature_sequence' }, container );
-        dojo.create( 'h2', { className: 'field feature_sequence', innerHTML: 'Protein sequence', title: 'protein sequence underlying this '+(f.get('type') || 'feature') }, field_container );
-        var proteinContainerID = 'feature_sequence'+this._uniqID();
+        dojo.create( 'h2', { className: 'field feature_sequence', innerHTML: 'Region protein sequence', title: 'protein sequence underlying this '+(f.get('type') || 'feature') }, field_container );
+        var proteinContainerID = 'feature_sequence_'+this._uniqID();
         var proteinContainer = dojo.create(
             'div', {
                 id: proteinContainerID,
@@ -239,7 +240,7 @@ return declare( FeatureDescriptionMixin, {
             }, field_container);
         var maxSize = this.config.maxFeatureSizeForUnderlyingRefSeq;
         if( maxSize < (f.get('end') - f.get('start')) ) {
-            proteinContainer.innerHTML = 'Not displaying underlying reference sequence, feature is longer than maximum of '+Util.humanReadableNumber(maxSize)/3+'bp';
+            proteinContainer.innerHTML = 'Not displaying underlying reference sequence, feature is longer than maximum of '+Util.humanReadableNumber(maxSize)+'bp';
         } else {
              track.browser.getStore('refseqs', dojo.hitch(this,function( refSeqStore ) {
                  proteinContainer = dojo.byId(proteinContainerID) || proteinContainer;
@@ -254,14 +255,15 @@ return declare( FeatureDescriptionMixin, {
                              // parser, but this callback may be called either
                              // before or after that happens.  if the fetch by
                              // ID fails, we have come back before the parse.
-                             var textArea = new AminoAcidView({ track: this, width: 62, htmlMaxRows: 10 })
+                             var textArea = new AminoAcidView({ track: this, width: 60, htmlMaxRows: 10 })
                                                 .renderHTML(
                                                     { ref:   this.refSeq.name,
                                                       start: f.get('start'),
                                                       end:   f.get('end'),
                                                       strand: f.get('strand'),
                                                       type: f.get('type'),
-                                                      product: f.get('product') == undefined? f.get('name') : f.get('product')
+                                                      product: f.get('product'),
+                                                      name: f.get('name') == undefined ? f.get('id') : f.get('name')
                                                     },
                                                     f.get('strand') == -1 ? Util.revcom(seq) : seq,
                                                     proteinContainer

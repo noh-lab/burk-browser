@@ -67,8 +67,6 @@ div.powered_by {
 .help_dialog ul {
     padding-left: 0;
 }
-.help_dialog div.main {
-}
 .help_dialog div.main > dl {
     width: 90%;
     margin: 0 auto 1em auto;
@@ -154,6 +152,20 @@ a.dialog-new-window {
 .feature-detail .fastaView textarea {
     padding: 1em 1.5em;
     margin: 0;
+    border: none;
+}
+
+.feature-detail .aminoacidView {
+    padding: 1;
+    border: 1px solid #aaa;
+}
+
+.feature-detail .aminoacidView .dijitToolbar {
+    text-align: right;
+}
+.feature-detail .aminoacidView textarea {
+    padding: 1em 1.5em;
+    margin: 1;
     border: none;
 }
 
