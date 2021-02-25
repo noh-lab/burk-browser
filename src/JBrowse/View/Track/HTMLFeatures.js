@@ -1013,7 +1013,7 @@ define( [
 
                 // if the label extends beyond the feature, use the
                 // label end position as the end position for layout
-                var name = this.getFeatureLabel( feature );
+                var name = feature.get('product') == "hypothetical protein" ? this.getFeatureLabel(feature) : feature.get('product') ;
                 var description = scale > descriptionScale && this.getFeatureDescription(feature);
                 if( description && description.length > this.config.style.maxDescriptionLength )
                     description = description.substr(0, this.config.style.maxDescriptionLength+1 ).replace(/(\s+\S+|\s*)$/,'')+String.fromCharCode(8230);
