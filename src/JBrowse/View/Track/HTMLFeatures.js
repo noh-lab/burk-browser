@@ -146,7 +146,7 @@ define( [
                                 },
                                 "action" : function(){
                                     var ref   = this.track.refSeq;
-                                    var paddingBp = Math.round( 10 /*pixels*/  /* px/bp */ );
+                                    var paddingBp = 10
                                     var start = Math.max( ref.start, this.feature.get('start') - paddingBp );
                                     var end   = Math.min( ref.end, this.feature.get('end') + paddingBp );
                                     this.track.genomeView.setLocation( ref, start, end );
