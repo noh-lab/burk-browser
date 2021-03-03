@@ -127,7 +127,7 @@ define( [
                                 action: 'contentDialog',
                                 iconClass: 'dijitIconTask',
                                 content: dojo.hitch( this, 'defaultFeatureDetail' )
-                            },
+                            },                            
                             { label: function() {
                                 return 'Highlight this '
                                     +( this.feature && this.feature.get('type') ? this.feature.get('type')
@@ -139,6 +139,19 @@ define( [
                                     this.track.browser.setHighlightAndRedraw(loc);
                                 },
                                 iconClass: 'dijitIconFilter'
+                            },
+                            {
+                                "label" : function() {
+                                    return 'Zoom to this '+( this.feature.get('type') || 'feature' );
+                                },
+                                "action" : function(){
+                                    var ref   = this.track.refSeq;
+                                    var paddingBp = Math.round( 10 /*pixels*/  /* px/bp */ );
+                                    var start = Math.max( ref.start, this.feature.get('start') - paddingBp );
+                                    var end   = Math.min( ref.end, this.feature.get('end') + paddingBp );
+                                    this.track.genomeView.setLocation( ref, start, end );
+                                },
+                                "iconClass" : "dijitIconConnector"
                             }
                         ]
                     });
