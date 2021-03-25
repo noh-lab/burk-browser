@@ -23,10 +23,10 @@ def read_bed(filepath):
 
 def build_record(record, id):
     returning = []
-    returning.append(0)
     returning.append(record[1]) # start
     returning.append(record[2]) # end
     returning.append(1) # strand
+    returning.append("island_"+str(id)) # id
     returning.append(record[3]) # name
     returning.append(record[4].strip("\n")) # note
     returning.append(0) # phase
@@ -72,7 +72,7 @@ def to_json_format(bed_data):
                                         ]
     returning["intervals"]["count"] = len(bed_data)
     returning["intervals"]["lazyClass"] = 1
-    returning["intervals"]["maxEnd"] = bed_data[-1][3]
+    returning["intervals"]["maxEnd"] = bed_data[-1][1]
     returning["intervals"]["minStart"] = bed_data[0][1]
     returning["intervals"]["nclist"] = bed_data
     returning["intervals"]["urlTemplate"] = "lf-{Chunk}.json"
