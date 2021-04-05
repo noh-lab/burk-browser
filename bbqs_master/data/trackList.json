@@ -146,6 +146,23 @@
          "type": "JBrowse/View/Track/CanvasFeatures",
          "urlTemplate": "tracks/BBQS859/{refseq}/trackData_islands.json",
          "metadata": {}
+      },
+      {
+         "category": "Secretion System",
+         "hideFAASequenceBox": true,
+         "maxFeatureGlyphExpansion": 2000,
+         "maxFeatureSizeForUnderlyingRefSeq": 250000,
+         "enableCollapsedMouseover": false,
+         "disableCollapsedClick": false,
+         "maxHeight": 1000,
+         "compress": 0,
+         "key": "Secretion System Features",
+         "label": "SecretionSystem",
+         "storeClass": "JBrowse/Store/SeqFeature/NCList",
+         "trackType": "JBrowse/View/Track/CanvasFeatures",
+         "type": "JBrowse/View/Track/CanvasFeatures",
+         "urlTemplate": "tracks/BBQS859/{refseq}/trackData_secretion.json",
+         "metadata": {}
       }
    ]
 }

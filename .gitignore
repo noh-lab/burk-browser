@@ -39,6 +39,8 @@ dist/
 npm-debug.log
 yarn-error.log
 package-lock.json
+baqs_docs
+bhqs_docs
 
 ## docusaurus
 lib/core/metadata.js
