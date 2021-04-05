@@ -1,0 +1,45 @@
+{
+    "featureCount": 21,
+    "formatVersion": 1,
+    "intervals": {
+        "classes": [
+            {
+                "attributes": [
+                    "Start",
+                    "End",
+                    "Strand",
+                    "Id",
+                    "Name",
+                    "Note",
+                    "Phase",
+                    "Replicon",
+                    "Seq_id",
+                    "Source",
+                    "Type"
+                ],
+                "isArrayAttr": {}
+            },
+            {
+                "attributes": [
+                    "Start",
+                    "End",
+                    "Chunk"
+                ],
+                "isArrayAttr": {}
+            }
+        ],
+        "count": 21,
+        "maxEnd": 3168871,
+        "minStart": 104962,
+        "lazyClass": 1,
+        "nclist": [
+            [
+                1,
+                104962,
+                3168871,
+                0
+            ]
+        ],
+        "urlTemplate": "isl-{Chunk}.json"
+    }
+}
