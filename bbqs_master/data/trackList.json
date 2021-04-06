@@ -133,7 +133,7 @@
       {
          "category": "Island Predictions",
          "hideFAASequenceBox": true,
-         "maxFeatureGlyphExpansion": 2000,
+         "maxFeatureGlyphExpansion": 500000,
          "maxFeatureSizeForUnderlyingRefSeq": 250000,
          "enableCollapsedMouseover": false,
          "disableCollapsedClick": false,
@@ -150,7 +150,7 @@
       {
          "category": "Secretion System",
          "hideFAASequenceBox": true,
-         "maxFeatureGlyphExpansion": 2000,
+         "maxFeatureGlyphExpansion": 500000,
          "maxFeatureSizeForUnderlyingRefSeq": 250000,
          "enableCollapsedMouseover": false,
          "disableCollapsedClick": false,
