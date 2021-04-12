@@ -1,0 +1,17 @@
+Build started: Fri Apr 02 2021 10:20:22 GMT-0400 (Eastern Daylight Time)
+Build application version: 1.16.4 (d25cb52)
+Messages:
+info(107) Package Version:
+	package: dojo; version: 1.16.4
+	package: util; version: 1.16.4
+warn(209) Missing or empty package.json.
+	filename: /web/docs/bbqs_docs/node_modules/dojo-util/build/package.json
+warn(226) A package without a profile could throw errors or warnings.
+	package: dojo-util
+Layer Contents:
+
+
+Process finished normally
+	errors: 0
+	warnings: 2
+	build time: 0.031 seconds
