@@ -15,37 +15,17 @@ def read_bed(filepath):
     curr = 0
     with open(filepath) as bed:
         for line in bed:
-            line = line.split("\t")
+            line = list(filter(None, line.split("\t")))
             if line[3] in ids:
                 continue
             if line[7] in bed_records.keys():
                 bed_records[line[7]].append(build_formatted_record(line, curr))
             else:
                 bed_records[line[8]] = [build_formatted_record(line, curr)]
-            #bed_records.append(build_record(line, curr))
             ids.append(line[4])
             curr += 1
 
     return bed_records
-
-
-def build_record(record, id):
-    returning = []
-    
-    returning.append(0)
-    returning.append(int(record[1])-1) # start
-    returning.append(int(record[2])) # end
-    returning.append(1) # strand
-    returning.append("island_"+str(id)) # id
-    returning.append(record[3]) # name
-    returning.append(record[4].strip("\n")) # note
-    returning.append("0") # phase
-    returning.append("chromosome_"+record[0][-3]) # seq_id
-    returning.append(record[0]) # replicon
-    returning.append(record[4].strip("\n").split(" ")[2]) # source
-    returning.append("genomic island") # type
-
-    return returning
 
 
 def build_formatted_record(record, curr):
