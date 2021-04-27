@@ -63,8 +63,8 @@ def to_json_format(bed_data, chunk_name):
                                                         "Name",
                                                         "Note",
                                                         "Phase",
-                                                        "Replicon",
                                                         "Seq_id",
+                                                        "Replicon",
                                                         "Source",
                                                         "Type"
                                                     ],
