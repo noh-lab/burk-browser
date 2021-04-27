@@ -2,7 +2,6 @@
 Generates a name text file for a gff file
 """
 import argparse
-import json
 
 
 def parse_gff(fn):
@@ -85,12 +84,12 @@ def partition_sequences(names):
     return sequences
 
 
-def write_names(fn, strain, names):
+def write_names(fn, strain, names, method):
 
     names = partition_sequences(names)
 
     for seq_id in names:
-        with open(f"data/tracks/{strain}/{seq_id}/{fn}", 'w') as f:
+        with open(f"data/tracks/{strain}/{seq_id}/{fn}", method) as f:
             for line in names[seq_id]:
                 search = '","'.join(line[0])
                 other = '","'.join(line[1:])
@@ -113,4 +112,4 @@ if __name__ == "__main__":
     args = vars(parser.parse_args())
     gff = parse_gff(args["in"])
     names = build_names(gff, args["strain"])
-    write_names(args["out"], args["strain"], names)
+    write_names(args["out"], args["strain"], names, "w")
