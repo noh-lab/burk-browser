@@ -1,13 +1,14 @@
 """
 This file puts a bed file in the format
 
-gene    start   end     type      prediction
+start   end     strand      id      name    details     phase     seq_id    replicon    source      type
 
 into the json format expected by jbrowse for display
 of genomic islands.
 """
 import argparse
 import json
+
 
 def read_bed(filepath):
     bed_records = {}
@@ -33,7 +34,7 @@ def build_formatted_record(record, curr):
         record[2] = -1
     if record[2] == "+":
         record[2] = 1
-           
+
     record[0] = int(record[0])
     record[1] = int(record[1])
 
@@ -46,15 +47,15 @@ def build_formatted_record(record, curr):
 def to_json_format(bed_data, chunk_name):
     returning = {}
     lazy_loader = {}
-    for replicon in bed_data.keys():
-        returning[replicon] = {}
-        lazy_loader[replicon] = bed_data[replicon]
-        nc_list = [[1, bed_data[replicon][0][1], bed_data[replicon][-1][2], 0]]
-        returning[replicon]["featureCount"] = len(bed_data[replicon])
-        returning[replicon]["formatVersion"] = 1
-        returning[replicon]["intervals"] = {}
-        returning[replicon]["intervals"]["classes"] = [ 
-                                                { "attributes": 
+    for seq_id in bed_data.keys():
+        returning[seq_id] = {}
+        lazy_loader[seq_id] = bed_data[seq_id]
+        nc_list = [[1, bed_data[seq_id][0][1], bed_data[seq_id][-1][2], 0]]
+        returning[seq_id]["featureCount"] = len(bed_data[seq_id])
+        returning[seq_id]["formatVersion"] = 1
+        returning[seq_id]["intervals"] = {}
+        returning[seq_id]["intervals"]["classes"] = [
+            {"attributes":
                                                     [
                                                         "Start",
                                                         "End",
@@ -68,35 +69,39 @@ def to_json_format(bed_data, chunk_name):
                                                         "Source",
                                                         "Type"
                                                     ],
-                                                    "isArrayAttr": {}
-                                                },
-                                                { "attributes": [
-                                                        "Start",
-                                                        "End",
-                                                        "Chunk"
-                                                ],
-                                                "isArrayAttr": {}
-                }
-                                            ]
-        returning[replicon]["intervals"]["count"] = len(bed_data[replicon])
-        returning[replicon]["intervals"]["maxEnd"] = bed_data[replicon][-1][2]
-        returning[replicon]["intervals"]["minStart"] = bed_data[replicon][0][1]
-        returning[replicon]["intervals"]["lazyClass"] = 1
-        returning[replicon]["intervals"]["nclist"] = nc_list
-        returning[replicon]["intervals"]["urlTemplate"] = chunk_name + "-{Chunk}.json"
+             "isArrayAttr": {}
+             },
+            {"attributes": [
+                "Start",
+                "End",
+                "Chunk"
+            ],
+                "isArrayAttr": {}
+            }
+        ]
+        returning[seq_id]["intervals"]["count"] = len(bed_data[seq_id])
+        returning[seq_id]["intervals"]["maxEnd"] = bed_data[seq_id][-1][2]
+        returning[seq_id]["intervals"]["minStart"] = bed_data[seq_id][0][1]
+        returning[seq_id]["intervals"]["lazyClass"] = 1
+        returning[seq_id]["intervals"]["nclist"] = nc_list
+        returning[seq_id]["intervals"]["urlTemplate"] = chunk_name + \
+            "-{Chunk}.json"
 
     return lazy_loader, returning
-    
+
 
 def write_json(track_data, out_name, chunk_name, strain):
-    for replicon in track_data[1].keys():
-        json.dump(track_data[1][replicon], open(f"data/tracks/{strain}/{replicon}/{out_name}", 'w'))
-        json.dump(track_data[0][replicon], open(f"data/tracks/{strain}/{replicon}/{chunk_name}-0.json", 'w'))
+    for seq_id in track_data[1].keys():
+        json.dump(track_data[1][seq_id], open(
+            f"data/tracks/{strain}/{seq_id}/{out_name}", 'w'))
+        json.dump(track_data[0][seq_id], open(
+            f"data/tracks/{strain}/{seq_id}/{chunk_name}-0.json", 'w'))
 
 
 def write_bed(filename, bed_data):
     with open(filename+".fixed", "w") as f:
-        f.write("start\tend\tstrand\tid\tname\tnote\tphase\treplicon\tseq_id\tsource\ttype\n")
+        f.write(
+            "start\tend\tstrand\tid\tname\tnote\tphase\tseq_id\treplicon\tsource\ttype\n")
         for record in bed_data:
             f.write("\t".join(record)+"\n")
 
@@ -104,7 +109,8 @@ def write_bed(filename, bed_data):
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description='Process a BED file into JSON format.')
+    parser = argparse.ArgumentParser(
+        description='Process a BED file into JSON format.')
     parser.add_argument('--in', "-i", type=str, required=False, default="islandData.bed",
                         help='the name of the BED file to be processed (default: %(default)s)')
     parser.add_argument('--out', "-o", type=str, required=False, default="trackData.json",
@@ -115,5 +121,6 @@ if __name__ == "__main__":
                         help='the strain on which we are operating (default: %(default)s)')
 
     args = vars(parser.parse_args())
-    write_json(to_json_format(read_bed(args["in"]), args["chunk"]), args["out"], args["chunk"], args["strain"])
+    write_json(to_json_format(read_bed(
+        args["in"]), args["chunk"]), args["out"], args["chunk"], args["strain"])
     #write_bed(args["in"], read_bed(args["in"]))
