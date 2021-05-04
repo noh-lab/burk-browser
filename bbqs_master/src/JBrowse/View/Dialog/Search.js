@@ -140,7 +140,7 @@ function (
                                         locstring: Util.assembleLocString(elt.multipleLocations[j]),
                                         location: elt.multipleLocations[j],
                                         label: elt.name,
-                                        description: track.key || track.label || defaultTrack.key || defaultTrack.label || 'Unknown track',
+                                        description: track.label || track.key || defaultTrack.label || defaultTrack.key || 'Unknown track',
                                         tracks: track
                                     });
                                 }
@@ -150,7 +150,7 @@ function (
                                     locstring: Util.assembleLocString(elt.location),
                                     location: elt.location,
                                     label: elt.location.objectName,
-                                    description: track.key || track.label || defaultTrack.key || defaultTrack.label || 'Unknown track',
+                                    description: track.label || track.key || defaultTrack.label || defaultTrack.key || 'Unknown track',
                                     tracks: track
                                 });
                             }
