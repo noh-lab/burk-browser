@@ -128,18 +128,19 @@ function (
                 var promises = nameMatches.map((match) => this.browser.nameStore.query({ name: match.name }));
                 Promise.all(promises).then((res) => {
                     var grid = [];
+                    var defaultTrack = this.browser.config.tracks[this.browser.config.tracks.map(e => e.category).indexOf('Known Genes')];
                     for(var i = 0; i < res.length; i++) {
                         var elt = res[i];
                         if(elt.length) {
                             elt = elt[0];
                             if(elt.multipleLocations) {
                                 for(var j = 0; j < elt.multipleLocations.length; j++) {
-                                    var track = elt.multipleLocations[j].tracks.length ? elt.multipleLocations[j].tracks[0] : {};
+                                    var track = (elt.multipleLocations[j].tracks||[]).length ? elt.multipleLocations[j].tracks[0] : {};
                                     grid.push({
                                         locstring: Util.assembleLocString(elt.multipleLocations[j]),
                                         location: elt.multipleLocations[j],
                                         label: elt.name,
-                                        description: track.key || track.label || 'Unknown track',
+                                        description: track.key || track.label || defaultTrack.key || defaultTrack.label || 'Unknown track',
                                         tracks: track
                                     });
                                 }
@@ -149,7 +150,7 @@ function (
                                     locstring: Util.assembleLocString(elt.location),
                                     location: elt.location,
                                     label: elt.location.objectName,
-                                    description: track.key || track.label || 'Unknown track',
+                                    description: track.key || track.label || defaultTrack.key || defaultTrack.label || 'Unknown track',
                                     tracks: track
                                 });
                             }
