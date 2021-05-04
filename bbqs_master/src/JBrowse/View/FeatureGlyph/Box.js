@@ -213,10 +213,42 @@ return declare([ FeatureGlyph, FeatureLabelMixin], {
 
         // background
         var bgcolor = style( feature, 'color' );
-        if( bgcolor ) {
+        var f_name = feature.get('name').slice(0,2);
+        if( f_name == "T1"){
             context.fillStyle = bgcolor;
             context.fillRect( left, top, Math.max(1,width), height );
-
+        }
+        else if( f_name == "T2"){
+            context.fillStyle = "blue";
+            context.fillRect( left, top, Math.max(1,width), height );
+        }
+        else if( f_name == "T3"){
+            context.fillStyle = "purple";
+            context.fillRect( left, top, Math.max(1,width), height );
+        }
+        else if( f_name == "T4"){
+            context.fillStyle = "red";
+            context.fillRect( left, top, Math.max(1,width), height );
+        }
+        else if( f_name == "T5"){
+            context.fillStyle = "green";
+            context.fillRect( left, top, Math.max(1,width), height );
+        }
+        else if( f_name == "T6"){
+            context.fillStyle = "yellow";
+            context.fillRect( left, top, Math.max(1,width), height );
+        }
+        else if( f_name == "Ta"){
+            context.fillStyle = "pink";
+            context.fillRect( left, top, Math.max(1,width), height );
+        }
+        else if( f_name == "Fl"){
+            context.fillStyle = "teal";
+            context.fillRect( left, top, Math.max(1,width), height );
+        }
+        else if( bgcolor ) {
+            context.fillStyle = bgcolor;
+            context.fillRect( left, top, Math.max(1,width), height );
         }
         else {
             context.clearRect( left, top, Math.max(1,width), height );
