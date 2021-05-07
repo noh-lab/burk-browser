@@ -214,35 +214,36 @@ return declare([ FeatureGlyph, FeatureLabelMixin], {
         // background
         var bgcolor = style( feature, 'color' );
         var f_name = feature.get('name').slice(0,2);
-        if( f_name == "T1"){
+        var f_ss = feature.get('type').slice(0,3) == "sec";
+        if( f_name == "T1" && f_ss){
             context.fillStyle = bgcolor;
             context.fillRect( left, top, Math.max(1,width), height );
         }
-        else if( f_name == "T2"){
+        else if( f_name == "T2" && f_ss){
             context.fillStyle = "blue";
             context.fillRect( left, top, Math.max(1,width), height );
         }
-        else if( f_name == "T3"){
+        else if( f_name == "T3" && f_ss){
             context.fillStyle = "purple";
             context.fillRect( left, top, Math.max(1,width), height );
         }
-        else if( f_name == "T4"){
+        else if( f_name == "T4" && f_ss){
             context.fillStyle = "red";
             context.fillRect( left, top, Math.max(1,width), height );
         }
-        else if( f_name == "T5"){
+        else if( f_name == "T5" && f_ss){
             context.fillStyle = "green";
             context.fillRect( left, top, Math.max(1,width), height );
         }
-        else if( f_name == "T6"){
-            context.fillStyle = "yellow";
+        else if( f_name == "T6" && f_ss){
+            context.fillStyle = "magenta";
             context.fillRect( left, top, Math.max(1,width), height );
         }
-        else if( f_name == "Ta"){
+        else if( f_name == "Ta" && f_ss){
             context.fillStyle = "pink";
             context.fillRect( left, top, Math.max(1,width), height );
         }
-        else if( f_name == "Fl"){
+        else if( f_name == "Fl" && f_ss){
             context.fillStyle = "teal";
             context.fillRect( left, top, Math.max(1,width), height );
         }
