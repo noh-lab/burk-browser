@@ -216,35 +216,35 @@ return declare([ FeatureGlyph, FeatureLabelMixin], {
         var f_name = feature.get('name').slice(0,2);
         var f_ss = feature.get('type').slice(0,3) == "sec";
         if( f_name == "T1" && f_ss){
-            context.fillStyle = bgcolor;
+            context.fillStyle = "rosybrown";
             context.fillRect( left, top, Math.max(1,width), height );
         }
         else if( f_name == "T2" && f_ss){
-            context.fillStyle = "blue";
+            context.fillStyle = "goldenrod";
             context.fillRect( left, top, Math.max(1,width), height );
         }
         else if( f_name == "T3" && f_ss){
-            context.fillStyle = "purple";
+            context.fillStyle = "peru";
             context.fillRect( left, top, Math.max(1,width), height );
         }
         else if( f_name == "T4" && f_ss){
-            context.fillStyle = "red";
+            context.fillStyle = "olive";
             context.fillRect( left, top, Math.max(1,width), height );
         }
         else if( f_name == "T5" && f_ss){
-            context.fillStyle = "green";
+            context.fillStyle = "chocolate";
             context.fillRect( left, top, Math.max(1,width), height );
         }
         else if( f_name == "T6" && f_ss){
-            context.fillStyle = "magenta";
+            context.fillStyle = "brown";
             context.fillRect( left, top, Math.max(1,width), height );
         }
         else if( f_name == "Ta" && f_ss){
-            context.fillStyle = "pink";
+            context.fillStyle = "maroon";
             context.fillRect( left, top, Math.max(1,width), height );
         }
         else if( f_name == "Fl" && f_ss){
-            context.fillStyle = "teal";
+            context.fillStyle = "olive";
             context.fillRect( left, top, Math.max(1,width), height );
         }
         else if( bgcolor ) {
