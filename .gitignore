@@ -51,3 +51,6 @@ website/translated_docs
 website/build/
 website/node_modules
 website/i18n/*
+bbqs_master/raw/bbqs859_chr1_GI.bed
+bbqs_master/raw/bbqs859_chr2_GI.bed
+bbqs_master/raw/bbqs859.ss_components_for_browser.txt
