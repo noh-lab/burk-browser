@@ -224,23 +224,23 @@ return declare([ FeatureGlyph, FeatureLabelMixin], {
             context.fillRect( left, top, Math.max(1,width), height );
         }
         else if( f_name == "T3" && f_ss){
-            context.fillStyle = "peru";
-            context.fillRect( left, top, Math.max(1,width), height );
-        }
-        else if( f_name == "T4" && f_ss){
             context.fillStyle = "olive";
             context.fillRect( left, top, Math.max(1,width), height );
         }
-        else if( f_name == "T5" && f_ss){
+        else if( f_name == "T4" && f_ss){
             context.fillStyle = "chocolate";
             context.fillRect( left, top, Math.max(1,width), height );
         }
-        else if( f_name == "T6" && f_ss){
+        else if( f_name == "T5" && f_ss){
             context.fillStyle = "brown";
             context.fillRect( left, top, Math.max(1,width), height );
         }
-        else if( f_name == "Ta" && f_ss){
+        else if( f_name == "T6" && f_ss){
             context.fillStyle = "maroon";
+            context.fillRect( left, top, Math.max(1,width), height );
+        }
+        else if( f_name == "Ta" && f_ss){
+            context.fillStyle = "burlywood";
             context.fillRect( left, top, Math.max(1,width), height );
         }
         else if( f_name == "Fl" && f_ss){
