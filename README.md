@@ -3,8 +3,8 @@ Genome Browser for various Burkholderia studied in the Noh Lab, forked from Jbro
 # About
 
 This project uses a modified version of [Jbrowse](https://github.com/GMOD/jbrowse) to display information about the Burkholderia genome. This instance of Jbrowse 
-is using Node.js (v10.23.1) and the Express framework (v4.15.4) compiled with yarn (v1.22.20) for the front end. The backend of 
-the application is based fully in static JSON files used to represent various genomic features and rendered in real time by the
+is using Node.js (v10.23.1) and the Express framework (v4.15.4) compiled with yarn (v1.22.20) for the front-end. The back-end of 
+the application is based in static JSON files used to represent various genomic features and rendered in real time by the
 browsers' front-end. These files are generated using either prebuild Jbrowse Perl (v5.26.3) scripts or custom built Python (v3.6.8) 
 scripts. The front-end is served by a Centos 8 server running Nginx (v1.14.1) and available at [burk.colby.edu](burk.colby.edu).
 
