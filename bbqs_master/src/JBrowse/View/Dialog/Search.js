@@ -128,7 +128,7 @@ function (
                 var promises = nameMatches.map((match) => this.browser.nameStore.query({ name: match.name }));
                 Promise.all(promises).then((res) => {
                     var grid = [];
-                    var defaultTrack = this.browser.config.tracks[this.browser.config.tracks.map(e => e.category).indexOf('Known Genes')];
+                    var defaultTrack = this.browser.config.tracks[this.browser.config.tracks.map(e => e.key).indexOf('Genes and Proteins')];
                     for(var i = 0; i < res.length; i++) {
                         var elt = res[i];
                         if(elt.length) {
