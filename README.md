@@ -42,3 +42,7 @@ see PR [#6](https://github.com/noh-lab/burk-browser/pull/6) and [#8](https://git
 
 By default, features in Jbrowse render as the same color if they are in the same track. This change allowed for secretion system features to render in 
 different colors so they could be more easily identified and grouped into distinct systems. For more information, see PR [#7](https://github.com/noh-lab/burk-browser/pull/7).
+
+## Using and Maintaining the Browser
+
+For details on how to use and maintain the browser, please use the wiki page located [here](https://github.com/noh-lab/burk-browser/wiki/Home)
