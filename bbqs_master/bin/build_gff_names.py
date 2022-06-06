@@ -84,12 +84,12 @@ def partition_sequences(names):
     return sequences
 
 
-def write_names(fn, strain, names, method):
+def write_names(fn, strain, names, label, method):
 
     names = partition_sequences(names)
 
     for seq_id in names:
-        with open(f"data/tracks/{strain}/{seq_id}/{fn}", method) as f:
+        with open(f"data/tracks/{strain}/{label}/{seq_id}/{fn}", method) as f:
             for line in names[seq_id]:
                 search = '","'.join(line[0])
                 other = '","'.join(line[1:])
@@ -108,8 +108,10 @@ if __name__ == "__main__":
                         help='the name of the names file to write. NOTE: This should not be the full path and this program will prepend "data/tracks/strain/seq_id/" to the chosen name (default: %(default)s)')
     parser.add_argument('--strain', "-s", type=str, required=False, default="BBQS859",
                         help='the strain on which we are operating (default: %(default)s)')
+    parser.add_argument('--label', '-l', type=str, required=False, default='Prokka',
+                        help='the track label for the names being built. (default: %(default)s)')
 
     args = vars(parser.parse_args())
     gff = parse_gff(args["in"])
     names = build_names(gff, args["strain"])
-    write_names(args["out"], args["strain"], names, "w")
+    write_names(args["out"], args["strain"], names, args['label'], "w")

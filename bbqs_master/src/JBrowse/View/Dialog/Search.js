@@ -140,17 +140,19 @@ function (
                                         locstring: Util.assembleLocString(elt.multipleLocations[j]),
                                         location: elt.multipleLocations[j],
                                         label: elt.name,
-                                        description: track.label || track.key || defaultTrack.label || defaultTrack.key || 'Unknown track',
+                                        description: track.label || track.key || defaultTrack.key || defaultTrack.label || 'Unknown track',
                                         tracks: track
                                     });
                                 }
                             } else {
                                 var track = (elt.location.tracks||[]).length ? elt.location.tracks[0] : {};
+                                console.log(elt)
+                                console.log(track)
                                 grid.push({
                                     locstring: Util.assembleLocString(elt.location),
                                     location: elt.location,
                                     label: elt.location.objectName,
-                                    description: track.label || track.key || defaultTrack.label || defaultTrack.key || 'Unknown track',
+                                    description: track.label || track.key || defaultTrack.key || defaultTrack.label || 'Unknown track',
                                     tracks: track
                                 });
                             }
