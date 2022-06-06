@@ -29,6 +29,21 @@ def build_names(bed_data, strain):
     return names
 
 
+def write_names(fn, strain, names, label, method):
+
+    names = gff.partition_sequences(names)
+
+    for seq_id in names:
+        with open(f"data/tracks/{strain}/{label}/{seq_id}/{fn}", method) as f:
+            for line in names[seq_id]:
+                search = '","'.join(line[0])
+                other = '","'.join(line[1:])
+                out_string=f'[["{search}"],"{other}"]\n'
+                f.write(out_string)
+
+    return
+
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
         description='Build a names text file from a gff file.')
@@ -38,8 +53,10 @@ if __name__ == "__main__":
                         help='the name of the names file to write. NOTE: This should not be the full path and this program will prepend "data/tracks/strain/seq_id/" to the chosen name (default: %(default)s)')
     parser.add_argument('--strain', "-s", type=str, required=False, default="BBQS859",
                         help='the strain on which we are operating (default: %(default)s)')
+    parser.add_argument('--label', '-l', type=str, required=True,
+                        help='the track label for the names being built. Required.')
 
     args = vars(parser.parse_args())
     bed_data = bed.read_bed(args["in"])
     names = build_names(bed_data, args["strain"])
-    gff.write_names(args["out"], args["strain"], names, "a")
+    write_names(args["out"], args["strain"], names, args['label'], "w")
